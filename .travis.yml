@@ -1,0 +1,11 @@
+sudo: required
+language: generic
+
+services: # Tell travis we need this services 
+  - docker
+
+before_install:
+  - docker build -t fumegalli/docker-react -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true fumegalli/docker-react npm run test -- --coverage
